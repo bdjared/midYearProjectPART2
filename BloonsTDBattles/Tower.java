@@ -6,11 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Tower extends Actor
-{
+public abstract class Tower extends Actor {
+    public float attackSpeed;  
+    public float range;
     
-    public void act() 
-    {
-        // Add your action code here.
-    }    
+    private void createRange(){
+        new RangeCircle(range);
 }
