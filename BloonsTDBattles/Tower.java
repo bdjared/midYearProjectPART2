@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Tower here.
  * 
@@ -7,9 +7,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public abstract class Tower extends Actor {
-    public float attackSpeed;  
-    public float range;
+    public float attackSpeed; 
     
-    private void createRange(){
-        new RangeCircle(range);
+    
+    public List findBalloons(int range){
+        return getObjectsInRange(range * 100, Balloon.class);        
+    }
 }
