@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Balloon extends Actor implements Comparable<Balloon>{
-    public double speed = Math.random() * 10;
+    public double speed = 10;
     public double totalTime;
     public double remainingTime;
     /**
@@ -15,12 +15,16 @@ public class Balloon extends Actor implements Comparable<Balloon>{
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Balloon(){
-         totalTime = 600 / speed;
+         totalTime = (600) / speed;
          remainingTime = totalTime;
          getImage().scale(50, 75);
     }
     public void act()  {
-        
+        remainingTime = (600 - getX()) / speed;
+        setLocation(getX() + (int)speed, getY());
+        if (getX() == getWorld().getWidth()){
+            getWorld().removeObject(this);
+        }
     }    
     
     @Override

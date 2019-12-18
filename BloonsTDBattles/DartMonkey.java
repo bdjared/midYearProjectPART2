@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class DartMonkey extends Tower
 {
-    public int range = 10;
+    public int range = 15;
     public double attackDelay = 0.75;
     private List<Balloon> bloonsInRange;
     //public Projectile projectileType = "dart";
@@ -23,8 +23,12 @@ public class DartMonkey extends Tower
     } 
     
     private void aim() {
-        Balloon target = bloonsInRange.get(0);
+        if (bloonsInRange.isEmpty()){
+            ;
+        }
+        else {Balloon target = bloonsInRange.get(0);
         turnTowards(target.getX(), target.getY());
         turn(90);
+        }
     }
 }
