@@ -10,8 +10,9 @@ public class DartMonkey extends Tower
 {
     public int range = 15;
     public double attackDelay = 0.75;
+    private int pops;
     private List<Balloon> bloonsInRange;
-    //public Projectile projectileType = "dart";
+    public Projectile projectileType;
     
     public DartMonkey(){
         getImage().scale(150, 150);
@@ -19,16 +20,20 @@ public class DartMonkey extends Tower
     public void act() {
         bloonsInRange = super.findBalloons(range);
         Collections.sort(bloonsInRange);
-        aim();
+        if (!bloonsInRange.isEmpty()){
+            aim();
+            pops += attack();
+        }
     } 
     
     private void aim() {
-        if (bloonsInRange.isEmpty()){
-            ;
-        }
-        else {Balloon target = bloonsInRange.get(0);
+        Balloon target = bloonsInRange.get(0);
         turnTowards(target.getX(), target.getY());
         turn(90);
-        }
+    }
+    
+    private int attack() {
+        Dart dart = new Dart(getRotation() + 90);
+        return 0;
     }
 }
