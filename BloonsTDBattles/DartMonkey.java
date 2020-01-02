@@ -22,6 +22,7 @@ public class DartMonkey extends Tower
         Collections.sort(bloonsInRange);
         if (!bloonsInRange.isEmpty()){
             aim();
+            attack();
             pops += attack();
         }
     } 
@@ -29,11 +30,11 @@ public class DartMonkey extends Tower
     private void aim() {
         Balloon target = bloonsInRange.get(0);
         turnTowards(target.getX(), target.getY());
-        turn(90);
+        turn(90);        
     }
     
     private int attack() {
         Dart dart = new Dart(getRotation() + 90);
-        return 0;
+        ;
     }
 }

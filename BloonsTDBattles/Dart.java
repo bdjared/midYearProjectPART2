@@ -13,10 +13,17 @@ public class Dart extends Projectile
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Dart(int angle){
+        setRotation(angle + 45);
+        getImage().scale(25,25);
     }
     
     public void act() 
     {
-        // Add your action code here.
+        int lifetime = 0;
+        while (lifetime < 200){
+            move(2);
+            if (isTouching(Balloon.class)){
+            }
+        }
     }    
 }
