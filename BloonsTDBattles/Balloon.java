@@ -21,7 +21,10 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     public void act(int speed)  {
         remainingTime = (600 - getX()) / speed;
         setLocation(getX() + (int)speed, getY());
-        if (getX() == getWorld().getWidth()){
+        if (getX() >= getWorld().getWidth() - 3){
+            getWorld().removeObject(this);            
+        }
+        else if (isTouching(Projectile.class)){
             getWorld().removeObject(this);
         }
     }    
