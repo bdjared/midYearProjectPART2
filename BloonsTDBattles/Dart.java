@@ -21,11 +21,12 @@ public class Dart extends Projectile
     public void act() 
     {
         int lifetime = 0;
-        while (lifetime < 200){
-            move(2);
+        while (lifetime < 200000){
+            move(40);
             if (isTouching(Balloon.class)){          
                pop();                
             }
+            lifetime++;
         }
         getWorld().removeObject(this);
     }  

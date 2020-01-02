@@ -33,7 +33,7 @@ public class DartMonkey extends Tower
         turn(90);        
     }
     
-    private int attack() {
+    public int attack() {
         Dart dart = new Dart(getRotation() + 90);
         if (dart.hits){
             return 1;
