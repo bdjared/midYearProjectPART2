@@ -14,16 +14,20 @@ public class Dart extends Projectile
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Dart(){
-        getImage().scale(35,35);
+        getImage().scale(50,50);
     }
     
     public void act() 
     {
-        for (int i = 0; i < 200; i++){
-            move(-1);
+        for (int i = 0; i < 10; i++){
+            move(-15);
+            if (getWorld() != null && isTouching(Balloon.class)){
+                getWorld().removeObject(this);
+            }
         }
-        
-        getWorld().removeObject(this);
+        if (getWorld() != null){
+            getWorld().removeObject(this);
+        }
         
     }    
 }

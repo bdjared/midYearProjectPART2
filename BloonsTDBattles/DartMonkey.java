@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class DartMonkey extends Tower
 {
-    public int range = 15;
-    public double attackDelay = 40;
+    public int range = 150;
+    public double attackDelay = 0;
     private List<Balloon> bloonsInRange;
     public Projectile projectileType;
     private Dart dart;

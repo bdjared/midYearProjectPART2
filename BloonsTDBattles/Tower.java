@@ -11,6 +11,6 @@ public abstract class Tower extends Actor {
     
     
     public List findBalloons(int range){
-        return getObjectsInRange(range * 10, Balloon.class);        
+        return getObjectsInRange(range, Balloon.class);        
     }
 }
