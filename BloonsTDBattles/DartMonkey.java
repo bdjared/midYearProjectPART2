@@ -9,7 +9,7 @@ import java.util.*;
 public class DartMonkey extends Tower
 {
     public int range = 15;
-    public double attackDelay = 0.75;
+    public double attackDelay = 40;
     private List<Balloon> bloonsInRange;
     public Projectile projectileType;
     private Dart dart;
@@ -18,11 +18,14 @@ public class DartMonkey extends Tower
         getImage().scale(150, 150);
     }
     public void act() {
+        attackDelay--;
         bloonsInRange = super.findBalloons(range);
         Collections.sort(bloonsInRange);
         if (!bloonsInRange.isEmpty()){
             aim();
-            attack();
+            if (attackDelay <= 0){
+                attack();
+            }
         }
     } 
     
@@ -33,9 +36,9 @@ public class DartMonkey extends Tower
     }
     
     public void attack() {
-        if (dart == null){
-            dart = new Dart(getRotation() + 90, this);
-        }
-        dart.act();
+        Dart dart = new Dart();            
+        getWorld().addObject(dart, getX(), getY() );
+        dart.setRotation(getRotation() + 90);
+        attackDelay = 40;
     }
 }
