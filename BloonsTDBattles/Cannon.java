@@ -13,7 +13,7 @@ public class Cannon extends Tower
     private List<Balloon> bloonsInRange;
     public Projectile projectileType;
     private Cannonball cannonball;
-    
+
     
     public Cannon() {
         getImage().scale(1500,1500);
@@ -28,9 +28,10 @@ public class Cannon extends Tower
         bloonsInRange = super.findBalloons(range);
         Collections.sort(bloonsInRange); 
         if (!bloonsInRange.isEmpty()) {
-            attack();
             aim();
-            
+            if (attackDelay <= 0) {
+                attack();
+            }
         }
     }    
     public void aim() {
@@ -39,9 +40,10 @@ public class Cannon extends Tower
         turn(90);
     }
     public void attack() {
-        if (cannonball == null) {
-            cannonball = new Cannonball();
-    }
-    cannonball.act();
+        Balloon target = bloonsInRange.get(0);
+        Cannonball cannonball = new Cannonball(getX(), getY());
+        cannonball.turnTowards(target.getX(), target.getY());
+        
 }
 }
+

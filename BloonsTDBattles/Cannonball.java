@@ -10,7 +10,7 @@ public class Cannonball extends Projectile
 {
     public boolean hits;
     
-    public Cannonball() {
+    public Cannonball(int x, int y) {
         getImage().scale(30,30);
     }
     
