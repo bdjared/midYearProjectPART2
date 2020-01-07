@@ -10,12 +10,22 @@ public class Cannonball extends Projectile
 {
     public boolean hits;
     
-    /**
-     * Act - do whatever the Cannonball wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public Cannonball() {
+        getImage().scale(30,30);
+    }
+    
+    
     public void act() 
     {
-        // Add your action code here.
+        for (int i = 0; i<10; i++) {
+            move(15); 
+            if (getWorld() != null && isTouching(Balloon.class)) {
+                getImage().scale(90,90);
+                getWorld().removeObject(this);
+            }
+        }
+        if (getWorld() != null) {
+            getWorld().removeObject(this);
+        }
     }    
 }
