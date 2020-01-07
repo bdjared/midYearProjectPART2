@@ -12,7 +12,6 @@ public class DartMonkey extends Tower
     public double attackDelay = 0;
     private List<Balloon> bloonsInRange;
     public Projectile projectileType;
-    private Dart dart;
     
     public DartMonkey(){
         getImage().scale(150, 150);
@@ -36,8 +35,9 @@ public class DartMonkey extends Tower
     }
     
     public void attack() {
-        Dart dart = new Dart(getX(), getY());  
+        Dart dart = new Dart();
+        getWorld().addObject(dart, getX(), getY());
         dart.setRotation(getRotation() + 90);
-        attackDelay = 40;
+        attackDelay = 30;
     }
 }

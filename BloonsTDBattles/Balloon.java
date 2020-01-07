@@ -24,9 +24,6 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         if (getX() >= getWorld().getWidth() - 3){
             getWorld().removeObject(this);            
         }
-        else if (isTouching(Projectile.class)){
-            getWorld().removeObject(this);
-        }
     }    
     
     @Override
