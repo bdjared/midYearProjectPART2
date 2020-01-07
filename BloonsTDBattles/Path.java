@@ -8,25 +8,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Path extends Actor
 {
-    int sx;
-    int sy;
-    int ex;
-    int ey;
+   
     /**
      * Constructor for objects of class Path.
      * 
      */
     
-    public Path(int sx,int sy,int ex,int ey){
-    this.sx = sx;
-    this.sy = sy;
-    this.ex = ex;
-    this.ey = ey;
-    }
+    
     public void act()
     {
-        GreenfootImage art = new GreenfootImage(10,10);
-        getWorld().getBackground().setColor(Color.MAGENTA);
-        getWorld().getBackground().drawLine(sx,sy,ex,ey);
+        GreenfootImage art = new GreenfootImage(100,100);
+        getWorld().getBackground().setColor(Color.BLACK);
+        getWorld().getBackground().drawLine(0,0,100,100);
     }
 }
