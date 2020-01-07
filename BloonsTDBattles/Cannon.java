@@ -40,7 +40,7 @@ public class Cannon extends Tower
     }
     public void attack() {
         if (cannonball == null) {
-            cannonball = new Cannonball(getRotation() + 90, this);
+            cannonball = new Cannonball();
     }
     cannonball.act();
 }
