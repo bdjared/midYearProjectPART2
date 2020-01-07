@@ -13,27 +13,22 @@ public class Dart extends Projectile
      * Act - do whatever the Dart wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Dart(int angle){
-        setRotation(angle + 45);
-        getImage().scale(25,25);
+    public Dart(int x, int y){
+        getImage().scale(50,50);
+        setLocation(x, y);
     }
     
     public void act() 
     {
-        int lifetime = 0;
-        while (lifetime < 200000){
-            move(40);
-            if (isTouching(Balloon.class)){          
-               pop();                
+        for (int i = 0; i < 10; i++){
+            move(-15);
+            if (getWorld() != null && isTouching(Balloon.class)){
+                getWorld().removeObject(this);
             }
-            lifetime++;
         }
-        getWorld().removeObject(this);
-    }  
-    
-    private void pop(){
-        hits = true;
+        if (getWorld() != null){
+            getWorld().removeObject(this);
+        }
         
-        getWorld().removeObject(this);
-    }
+    }    
 }

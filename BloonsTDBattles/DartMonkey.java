@@ -8,22 +8,24 @@ import java.util.*;
  */
 public class DartMonkey extends Tower
 {
-    public int range = 15;
-    public double attackDelay = 0.75;
-    private int pops;
+    public int range = 150;
+    public double attackDelay = 0;
     private List<Balloon> bloonsInRange;
     public Projectile projectileType;
+    private Dart dart;
     
     public DartMonkey(){
         getImage().scale(150, 150);
     }
     public void act() {
+        attackDelay--;
         bloonsInRange = super.findBalloons(range);
         Collections.sort(bloonsInRange);
         if (!bloonsInRange.isEmpty()){
             aim();
-            attack();
-            pops += attack();
+            if (attackDelay <= 0){
+                attack();
+            }
         }
     } 
     
@@ -33,11 +35,9 @@ public class DartMonkey extends Tower
         turn(90);        
     }
     
-    public int attack() {
-        Dart dart = new Dart(getRotation() + 90);
-        if (dart.hits){
-            return 1;
-        }
-        return 0;
+    public void attack() {
+        Dart dart = new Dart(getX(), getY());  
+        dart.setRotation(getRotation() + 90);
+        attackDelay = 40;
     }
 }
