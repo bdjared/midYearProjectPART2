@@ -13,8 +13,9 @@ public class Dart extends Projectile
      * Act - do whatever the Dart wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Dart(){
+    public Dart(int x, int y){
         getImage().scale(50,50);
+        setLocation(x, y);
     }
     
     public void act() 

@@ -36,8 +36,7 @@ public class DartMonkey extends Tower
     }
     
     public void attack() {
-        Dart dart = new Dart();            
-        getWorld().addObject(dart, getX(), getY() );
+        Dart dart = new Dart(getX(), getY());  
         dart.setRotation(getRotation() + 90);
         attackDelay = 40;
     }
