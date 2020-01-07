@@ -23,17 +23,30 @@ public class blueBalloon extends Balloon
     public void lizzo(int speed){
         
         if(!isAtEdge()){
-            if(this.getX() <=  250 && this.getY()<200){
-                move(speed);
+            if(this.getX() < 250 && this.getY()<200){
+                setRotation(0);
+//                
             }
-            else if(this.getY() < 250){
+            else if(this.getY() < 250 && this.getX() < 300){
                 setRotation(90);
-                move(speed);
             }
-            else if(this.getX() < 400 && this.getY()>200){
-                setRotation(-90);
-                move(speed);
+            else if(this.getX() <400 && this.getY()>200){
+                setRotation(0);
             }
+            else if(this.getX() > 400 && this.getY()>175 && this.getX() < 525){
+                setRotation(270);
+            }
+            else if(this.getX()<550 ){
+                setRotation(0);
+            }
+            else{
+                setRotation(90);
+            }
+            move(speed);
+        }
+        
+        else{
+           getWorld().removeObject(this);
         }
     }
 }
