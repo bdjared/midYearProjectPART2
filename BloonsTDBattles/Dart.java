@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Dart extends Projectile
 {
     public boolean hits;
-    int life = 10;
+    int life = 15;
     /**
      * Act - do whatever the Dart wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

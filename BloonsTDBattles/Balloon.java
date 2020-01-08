@@ -20,7 +20,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
          this.speed = speed;
     }
     public void act()  {
-        remainingTime = (1030 - distance) / speed; 
+        remainingTime = 1030 - distance; 
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
         }
