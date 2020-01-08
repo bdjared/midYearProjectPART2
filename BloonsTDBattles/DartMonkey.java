@@ -38,6 +38,6 @@ public class DartMonkey extends Tower
         Dart dart = new Dart();
         getWorld().addObject(dart, getX(), getY());
         dart.setRotation(getRotation() + 90);
-        attackDelay = 50;
+        attackDelay = 40;
     }
 }

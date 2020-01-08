@@ -22,7 +22,8 @@ public class Dart extends Projectile
     {
         move(-15);
         if (getWorld() != null && isTouching(Balloon.class)){      
-            removeTouching(Balloon.class);
+            Balloon target = (Balloon)getOneIntersectingObject(Balloon.class);
+            target.pop();
             getWorld().removeObject(this);
         }
         if (getWorld() != null && (isAtEdge() || life == 0)){

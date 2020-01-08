@@ -14,39 +14,18 @@ public class blueBalloon extends Balloon
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public blueBalloon() {
-        super(7);
+        super(4);
     }
     public void act() 
     {
+      super.act();
       lizzo(speed);
     }
-    public void lizzo(int speed){
-        
-        if(!isAtEdge()){
-            if(this.getX() < 250 && this.getY()<200){
-                setRotation(0);
-//                
-            }
-            else if(this.getY() < 250 && this.getX() < 300){
-                setRotation(90);
-            }
-            else if(this.getX() <400 && this.getY()>200){
-                setRotation(0);
-            }
-            else if(this.getX() > 400 && this.getY()>175 && this.getX() < 525){
-                setRotation(270);
-            }
-            else if(this.getX()<550 ){
-                setRotation(0);
-            }
-            else{
-                setRotation(90);
-            }
-            move(speed);
-        }
-        
-        else{
-           getWorld().removeObject(this);
-        }
+    
+    public void pop(){
+        Balloon newBloon = new blueBalloon();
+        newBloon.distance = this.getDistance();
+        getWorld().addObject(newBloon, getX(), getY());
+        getWorld().removeObject(this);
     }
 }
