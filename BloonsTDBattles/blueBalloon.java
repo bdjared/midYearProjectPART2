@@ -23,7 +23,7 @@ public class blueBalloon extends Balloon
     }
     
     public void pop(){
-        Balloon newBloon = new blueBalloon();
+        Balloon newBloon = new redBalloon();
         newBloon.distance = this.getDistance();
         getWorld().addObject(newBloon, getX(), getY());
         getWorld().removeObject(this);
