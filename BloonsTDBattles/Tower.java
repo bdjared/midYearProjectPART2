@@ -6,11 +6,44 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Tower extends Actor {
-    public float attackSpeed; 
+public class Tower extends Actor {
+    public int range;
+    public double attackDelay;
+    public double wait = 0;
+    public String projectile;
+    private List<Balloon> bloonsInRange;  
     
+    public Tower(int range, double attackDelay, String projectile){
+        this.range = range;
+        this.attackDelay = attackDelay;
+        this.projectile = projectile;        
+    }
+       
+    public void act() {
+        attackDelay--;
+        bloonsInRange = findBalloons(range);
+        Collections.sort(bloonsInRange);
+        if (!bloonsInRange.isEmpty()){
+            aim();
+            if (attackDelay <= 0){
+                attack();
+            }
+        }
+    } 
     
     public List findBalloons(int range){
         return getObjectsInRange(range, Balloon.class);        
+    }  
+    
+    private void aim() {
+        Balloon target = bloonsInRange.get(0);
+        turnTowards(target.getX(), target.getY());        
+    }
+    
+    public void attack(){
+        Projectile shot = (Projectile)(Class.forName(projectile).newInstance());
+        getWorld().addObject(shot, getX(), getY());
+        shot.setRotation(getRotation() + 180);
+        wait = attackDelay;
     }
 }

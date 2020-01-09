@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Dart extends Projectile
 {
     public boolean hits;
-    int life = 15;
+    int life = 20;
     /**
      * Act - do whatever the Dart wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -20,7 +20,7 @@ public class Dart extends Projectile
     
     public void act() 
     {
-        move(-15);
+        move(-10);
         if (getWorld() != null && isTouching(Balloon.class)){      
             Balloon target = (Balloon)getOneIntersectingObject(Balloon.class);
             target.pop();

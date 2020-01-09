@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Cannonball here.
  * 
@@ -9,23 +9,27 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Cannonball extends Projectile
 {
     public boolean hits;
-    
-    public Cannonball(int x, int y) {
+    public int life = 40;
+    public Cannonball() {
         getImage().scale(30,30);
     }
     
     
-    public void act() 
-    {
-        for (int i = 0; i<10; i++) {
-            move(15); 
-            if (getWorld() != null && isTouching(Balloon.class)) {
-                getImage().scale(90,90);
+    public void act(){
+        move(-7);        
+        if (getWorld() != null && isTouching(Balloon.class)){
+            getImage().scale(80, 80);
+            if (isTouching(Balloon.class)){
+                List<Balloon> targets = getIntersectingObjects(Balloon.class);
+                for (Balloon target : targets){
+                    target.pop();
+                }
                 getWorld().removeObject(this);
             }
         }
-        if (getWorld() != null) {
-            getWorld().removeObject(this);
+        if (getWorld() != null && (isAtEdge() || life == 0)){
+           getWorld().removeObject(this);
         }
+        life--;        
     }    
 }
