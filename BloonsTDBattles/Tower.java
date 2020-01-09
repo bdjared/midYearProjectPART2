@@ -20,12 +20,12 @@ public class Tower extends Actor {
     }
        
     public void act() {
-        attackDelay--;
+        wait--;
         bloonsInRange = findBalloons(range);
         Collections.sort(bloonsInRange);
         if (!bloonsInRange.isEmpty()){
             aim();
-            if (attackDelay <= 0){
+            if (wait <= 0){
                 attack();
             }
         }
@@ -41,9 +41,13 @@ public class Tower extends Actor {
     }
     
     public void attack(){
-        Projectile shot = (Projectile)(Class.forName(projectile).newInstance());
-        getWorld().addObject(shot, getX(), getY());
-        shot.setRotation(getRotation() + 180);
+        try{
+            Projectile shot = (Projectile)(Class.forName(projectile).newInstance());
+            getWorld().addObject(shot, getX(), getY());
+            shot.setRotation(getRotation() + 180);     
+        } catch (Exception e){
+            System.err.println("Fuckin dumbass how did you do this");
+        }
         wait = attackDelay;
     }
 }
