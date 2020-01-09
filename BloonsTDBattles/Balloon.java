@@ -11,6 +11,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     public double remainingTime;
     public int distance = 0;
     public int speed;
+    int count;
     /**
      * Act - do whatever the Balloon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -67,6 +68,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     
     public void pop(){
         getWorld().removeObject(this);
+        count++;
     }
     
 }
