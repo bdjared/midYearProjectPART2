@@ -39,24 +39,24 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         
         if(!isAtEdge()){
             if(this.getX() < 250 && this.getY()<200){
-                setRotation(0);         
+                setLocation(getX()+speed, getY());        
             }
             else if(this.getY() < 250 && this.getX() < 300){
-                setRotation(90);
+                setLocation(getX(), getY()+speed);
             }
             else if(this.getX() <400 && this.getY()>200){
-                setRotation(0);
+                setLocation(getX()+speed, getY());
             }
             else if(this.getX() > 400 && this.getY()>175 && this.getX() < 525){
-                setRotation(270);
+                setLocation(getX(), getY()-speed);
             }
             else if(this.getX()<550 ){
-                setRotation(0);
+                setLocation(getX()+speed, getY());
             }
             else{
-                setRotation(90);
+                setLocation(getX(), getY()+speed);
             }
-            move(speed);            
+                        
             distance += speed;
         }
         
