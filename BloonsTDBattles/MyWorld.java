@@ -23,16 +23,16 @@ public class MyWorld extends World
     }
     
     public void act(){
-        
+     
     }
     
     public void Round1 () {
         for (int i = 0; i<=15; i++) {
            addObject(new redBalloon(), 0, 0);
         }
-      /*  if (getObjects(Balloon.class)) {
+      if (getObjects(Balloon.class).isEmpty()) {
         finito = true;
-    } */
+    } 
         if (finito = true) {
             guapo += 100;
             showText("Round finished! Press Spacebar to continue to the text round", 270, 200);
