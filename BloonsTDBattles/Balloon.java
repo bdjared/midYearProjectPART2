@@ -17,11 +17,10 @@ public class Balloon extends Actor implements Comparable<Balloon>{
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Balloon(int speed){
-         getImage().scale(50, 75);
+         getImage().scale(35, 50);
          this.speed = speed;
     }
     public void act()  {
-        remainingTime = 1030 - distance; 
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
         }
@@ -29,7 +28,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     
     @Override
     public int compareTo(Balloon other){
-        return new Double(remainingTime).compareTo(new Double(other.remainingTime));
+        return new Double(other.distance).compareTo(new Double(this.getDistance()));
     }
     
     public int getDistance(){

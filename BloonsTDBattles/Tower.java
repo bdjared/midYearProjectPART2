@@ -16,7 +16,8 @@ public class Tower extends Actor {
     public Tower(int range, double attackDelay, String projectile){
         this.range = range;
         this.attackDelay = attackDelay;
-        this.projectile = projectile;        
+        this.projectile = projectile;  
+        setRotation(-90);
     }
        
     public void act() {

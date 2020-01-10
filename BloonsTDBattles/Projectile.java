@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Projectile here.
  * 
@@ -8,12 +8,45 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Projectile extends Actor
 {
-    /**
-     * Act - do whatever the Projectile wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public int speed;
+    public int life;
+    public int hits;
+    
+    public Projectile(int speed, int life, int hits){
+        this.speed = speed;
+        this.life = life;
+        this.hits = hits;
+    }
+    
     public void act() 
     {
-        // Add your action code here.
-    }    
+        move(-speed);
+        if (getWorld() != null && isTouching(Balloon.class)){  
+            if (this instanceof Cannonball){
+                explode();
+            }
+            else{
+                Balloon target = (Balloon)getOneIntersectingObject(Balloon.class);
+                target.pop();
+            }
+            hits--;
+            if (hits == 0){                
+                getWorld().removeObject(this);
+            }
+        }
+        if (getWorld() != null && (isAtEdge() || life == 0)){
+           getWorld().removeObject(this);
+        }
+        life--;        
+    }
+    
+    private void explode(){
+        getImage().scale(80, 80);
+        if(isTouching(Balloon.class)){
+            List<Balloon> bloons = getIntersectingObjects(Balloon.class);
+            for (Balloon bloon : bloons){
+                bloon.pop();
+            }
+        }
+    }
 }

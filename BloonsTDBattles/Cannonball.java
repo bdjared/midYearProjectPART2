@@ -6,24 +6,24 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Cannonball extends Projectile
-{
-    public boolean hits;
-    public int life = 40;
+public class Cannonball extends Projectile{
     public Cannonball() {
+        super(7, 40, 1);
         getImage().scale(30,30);
-    }
-    
+    }    
     
     public void act(){
         move(-7);        
         if (getWorld() != null && isTouching(Balloon.class)){
             getImage().scale(80, 80);
-            if (isTouching(Balloon.class)){
-                List<Balloon> targets = getIntersectingObjects(Balloon.class);
-                for (Balloon target : targets){
-                    target.pop();
+            if(isTouching(Balloon.class)){
+                List<Balloon> bloons = getIntersectingObjects(Balloon.class);
+                for (Balloon bloon : bloons){
+                    bloon.pop();
                 }
+            }
+            hits--;
+            if (hits == 0){
                 getWorld().removeObject(this);
             }
         }
