@@ -47,12 +47,12 @@ public class Tower extends Actor {
             getWorld().addObject(shot, getX(), getY());
             shot.setRotation(getRotation() + 180);     
         } catch (Exception e){
-            System.err.println("Fuckin dumbass how did you do this");
+            System.err.println("error");
         }
         wait = attackDelay;
     }
     
     public void buy(){
-        
+        setLocation(300, 200);
     }
 }
