@@ -51,4 +51,8 @@ public class Tower extends Actor {
         }
         wait = attackDelay;
     }
+    
+    public void buy(){
+        
+    }
 }

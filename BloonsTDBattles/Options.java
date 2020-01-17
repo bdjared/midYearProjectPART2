@@ -1,0 +1,22 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Options here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Options extends Actor
+{
+    private Tower type;
+    /**
+     * Act - do whatever the Options wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act(){
+        if (Greenfoot.mouseClicked(this)){
+            Tower purchase = this.type;
+            purchase.buy();
+        }
+    }    
+}
