@@ -12,6 +12,7 @@ public class Tower extends Actor {
     public double wait = 0;
     public String projectile;
     private List<Balloon> bloonsInRange;  
+    public boolean placed = false;
     
     public Tower(int range, double attackDelay, String projectile){
         this.range = range;

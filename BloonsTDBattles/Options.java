@@ -9,6 +9,7 @@
 public class Options extends Actor
 {
     private String type = "DartMonkey";
+    private Tower tower;
     /**
      * Act - do whatever the Options wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -16,20 +17,23 @@ public class Options extends Actor
     public void act(){
         if (Greenfoot.mouseClicked(this)){
             try{
-                Tower tower = (Tower)(Class.forName(type).newInstance());
-                tower.setLocation(300, 200);
-                buy(tower);    
+                tower = (Tower)(Class.forName(type).newInstance());
+                getWorld().addObject(tower, 0, 0);
             } catch (Exception e){
                 System.err.println("error");
             }
         }
+        if (tower != null && !tower.placed){
+            buy(tower);
+        }
     } 
     
     public void buy(Tower tower){
-        while (!Greenfoot.mouseClicked(getWorld())){
-            tower.setLocation(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
-            if (Greenfoot.mouseClicked(getWorld())){
-                break;
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (mouse != null){
+            tower.setLocation(mouse.getX(), mouse.getY());
+            if (Greenfoot.mouseClicked(tower)){
+                tower.placed = true;
             }
         }
     }
