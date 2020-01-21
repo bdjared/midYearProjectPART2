@@ -52,4 +52,8 @@ public class Tower extends Actor {
         }
         wait = attackDelay;
     }
+    
+    public List touching(Class cls){
+        return getIntersectingObjects(cls);
+    }
 }

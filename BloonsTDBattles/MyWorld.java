@@ -77,8 +77,8 @@ public class MyWorld extends World
         addObject(buySuperMonkey,654,317);
         showText("$1000", 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
-        addObject(buyDartMonkey,654, 53);
-        showText("$150", 645, 93);
+        addObject(buyDartMonkey,650, 60);
+        showText("$150", 647, 100);
     }
 }
 
