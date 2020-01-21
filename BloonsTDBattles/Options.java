@@ -37,7 +37,7 @@ public class Options extends Actor
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null){
             tower.setLocation(mouse.getX(), mouse.getY());
-            if (Greenfoot.mouseClicked(tower) && tower.touching(Tower.class).isEmpty()){
+            if (Greenfoot.mouseClicked(tower) && !tower.touching(Tower.class)){
                 tower.placed = true;
             }
         }

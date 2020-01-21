@@ -12,6 +12,7 @@ public class MyWorld extends World
     public boolean finito = false;
     private int health;
     private int roundsCompleted = 0;
+    private int count = 0;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -23,8 +24,8 @@ public class MyWorld extends World
         prepare();
     }
 
-    public void act(){
-
+    public void act(){        
+        
     }
 
     public void Round1 () {
