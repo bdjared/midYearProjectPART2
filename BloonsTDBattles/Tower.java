@@ -17,8 +17,7 @@ public class Tower extends Actor {
     public Tower(int range, double attackDelay, String projectile){
         this.range = range;
         this.attackDelay = attackDelay;
-        this.projectile = projectile;  
-        setRotation(-90);
+        this.projectile = projectile;
     }
        
     public void act() {
@@ -39,14 +38,15 @@ public class Tower extends Actor {
     
     private void aim() {
         Balloon target = bloonsInRange.get(0);
-        turnTowards(target.getX(), target.getY());        
+        turnTowards(target.getX(), target.getY()); 
+        setRotation(getRotation() + 90);
     }
     
     public void attack(){
         try{
             Projectile shot = (Projectile)(Class.forName(projectile).newInstance());
             getWorld().addObject(shot, getX(), getY());
-            shot.setRotation(getRotation() + 180);     
+            shot.setRotation(getRotation() + 90);     
         } catch (Exception e){
             System.err.println("error");
         }

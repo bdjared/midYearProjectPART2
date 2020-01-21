@@ -6,14 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BuyCannon extends Options
-{
-    /**
-     * Act - do whatever the BuyCannon wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        // Add your action code here.
+public class BuyCannon extends Options{
+    public BuyCannon(){
+        super("Cannon");
+        getImage().scale(90, 120);
     }    
 }

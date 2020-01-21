@@ -6,14 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BuyDartMonkey extends Options
-{
-    /**
-     * Act - do whatever the BuyDartMonkey wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        // Add your action code here.
+public class BuyDartMonkey extends Options{
+    public BuyDartMonkey(){
+        super("DartMonkey");
+        getImage().scale(150, 150);
     }    
 }

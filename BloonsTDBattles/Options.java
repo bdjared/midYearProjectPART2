@@ -8,8 +8,13 @@
  */
 public class Options extends Actor
 {
-    private String type = "DartMonkey";
+    private String type;
     private Tower tower;
+    
+    public Options(String type){
+        this.type = type;
+    }
+    
     /**
      * Act - do whatever the Options wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
