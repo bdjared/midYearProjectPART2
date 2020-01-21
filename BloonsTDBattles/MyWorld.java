@@ -69,14 +69,16 @@ public class MyWorld extends World
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
-    private void prepare()
-    {
+    private void prepare(){
         BuyCannon buyCannon = new BuyCannon();
-        addObject(buyCannon,650,195);
+        addObject(buyCannon,650,185);
+        showText("$450", 645, 235);
         BuySuperMonkey buySuperMonkey = new BuySuperMonkey();
-        addObject(buySuperMonkey,654,327);
+        addObject(buySuperMonkey,654,317);
+        showText("$1000", 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
-        addObject(buyDartMonkey,654, 63);
+        addObject(buyDartMonkey,654, 53);
+        showText("$150", 645, 93);
     }
 }
 
