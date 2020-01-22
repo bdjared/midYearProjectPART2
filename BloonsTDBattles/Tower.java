@@ -25,7 +25,7 @@ public class Tower extends Actor {
         wait--;
         bloonsInRange = findBalloons(range);
         Collections.sort(bloonsInRange);
-        if (!bloonsInRange.isEmpty()){
+        if (!bloonsInRange.isEmpty() && placed){
             aim();
             if (wait <= 0){
                 attack();

@@ -70,16 +70,35 @@ public class MyWorld extends World
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
-    private void prepare(){
+    private void prepare(){        
         BuyCannon buyCannon = new BuyCannon();
         addObject(buyCannon,650,185);
         showText("$450", 645, 235);
         BuySuperMonkey buySuperMonkey = new BuySuperMonkey();
-        addObject(buySuperMonkey,654,317);
+        addObject(buySuperMonkey,651,317);
         showText("$1000", 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
         addObject(buyDartMonkey,650, 60);
         showText("$150", 647, 100);
+        
+        Track track = new Track();
+        track.getImage().scale(280, 60);
+        addObject(track,140, 70);
+        Track track1 = new Track();
+        track1.getImage().scale(60, 100);
+        addObject(track1,250, 150);
+        Track track2 = new Track();
+        track2.getImage().scale(230, 60);
+        addObject(track2,335, 230);
+        Track track3 = new Track();
+        track3.getImage().scale(180, 65);
+        addObject(track3,470, 182);
+        Track track4 = new Track();
+        track4.getImage().scale(65, 250);
+        addObject(track4,547, 275);
+        Track track5 = new Track();
+        track5.getImage().scale(1, 400);
+        addObject(track5,600, 200);
     }
 }
 

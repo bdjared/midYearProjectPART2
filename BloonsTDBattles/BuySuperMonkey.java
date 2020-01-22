@@ -9,6 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BuySuperMonkey extends Options{
     public BuySuperMonkey(){
         super("SuperMonkey");
-        getImage().scale(90, 100);
+        getImage().scale(93, 100);
     }      
 }
