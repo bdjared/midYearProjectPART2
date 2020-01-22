@@ -25,31 +25,34 @@ public class MyWorld extends World
         setPaintOrder(Tower.class, Range.class);
     }
 
-    public void act(){          
+    public void act(){ 
+        boolean round2started = false;
+        if (roundsCompleted == 0){
+            Round1();
+        }
+        if (roundsCompleted == 1 && (Greenfoot.isKeyDown("SPACE") || round2started)){
+            round2started = true;
+            Round2();
+        }
+        count++;
     }
 
     public void Round1 () {
-        for (int i = 0; i<=15; i++) {
+        if (count < 90 && count % 15 == 0){
             addObject(new redBalloon(), 0, 0);
         }
         if (getObjects(Balloon.class).isEmpty()) {
-            finito = true;
-        } 
-        if (finito = true) {
+            count = 0;
             guapo += 100;
-            showText("Round finished! Press Spacebar to continue to the text round", 270, 200);
-            if (Greenfoot.isKeyDown("SPACEBAR")){
-                Round2();
-            }
+            roundsCompleted++;
         }
     }
 
     public void Round2() {
-        for (int i = 0; i<=25; i++) {
+        if (count < 245 && count % 7 == 0){
             addObject(new redBalloon(), 0, 0);
         }
-        finito = true; 
-        if (finito = true) {
+        if (getObjects(Balloon.class).isEmpty()) {
             showText("Round finished! Press Spacebar to continue to the text round", 270, 200);
             if (Greenfoot.isKeyDown("SPACEBAR")){
                 Round3();
