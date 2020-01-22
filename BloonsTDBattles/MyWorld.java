@@ -24,8 +24,7 @@ public class MyWorld extends World
         prepare();
     }
 
-    public void act(){        
-        
+    public void act(){          
     }
 
     public void Round1 () {
