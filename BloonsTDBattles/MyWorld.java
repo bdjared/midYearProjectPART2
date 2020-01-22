@@ -78,7 +78,7 @@ public class MyWorld extends World
         showText("$1000", 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
         addObject(buyDartMonkey,650, 60);
-        showText("$150", 647, 100);
+        showText("$150", 648, 100);
         
         Track track = new Track();
         track.getImage().scale(280, 60);
