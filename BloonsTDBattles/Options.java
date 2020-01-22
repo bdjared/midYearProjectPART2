@@ -10,6 +10,7 @@ public class Options extends Actor
 {
     private String type;
     private Tower tower;
+    private Range range;
     
     public Options(String type){
         this.type = type;
@@ -23,23 +24,30 @@ public class Options extends Actor
         if (Greenfoot.mouseClicked(this)){
             try{
                 tower = (Tower)(Class.forName(type).newInstance());
+                range = new Range(tower);        
                 getWorld().addObject(tower, 0, 0);
+                getWorld().addObject(range, 0, 0);
             } catch (Exception e){
                 System.err.println("error");
             }
         }
         if (tower != null && !tower.placed){
-            buy(tower);
+            buy(tower, range);
         }
     } 
     
-    public void buy(Tower tower){
-        MouseInfo mouse = Greenfoot.getMouseInfo();
+    public void buy(Tower tower, Range range){
+        MouseInfo mouse = Greenfoot.getMouseInfo();  
+        range.reset();
         if (mouse != null){
             tower.setLocation(mouse.getX(), mouse.getY());
-            if (Greenfoot.mouseClicked(tower) && !tower.touching(Tower.class) && !tower.touching(Track.class) && mouse.getX() < 600){
-                tower.placed = true;
-            }
+            if (!tower.touching(Tower.class) && !tower.touching(Track.class) && mouse.getX() < 600){
+                range.placeable();
+                if (Greenfoot.mouseClicked(tower)){
+                    tower.placed = true;
+                    getWorld().removeObject(range);
+                }
+            } 
         }
     }
 }

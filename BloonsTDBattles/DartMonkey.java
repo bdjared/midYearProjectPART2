@@ -7,7 +7,7 @@ import greenfoot.*;
  */
 public class DartMonkey extends Tower{    
     public DartMonkey(){       
-        super(150, 40, "Dart");
+        super(200, 40, "Dart");
         getImage().scale(58, 70);
     }
 }

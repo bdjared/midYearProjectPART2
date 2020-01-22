@@ -23,7 +23,7 @@ public class Tower extends Actor {
        
     public void act() {
         wait--;
-        bloonsInRange = findBalloons(range);
+        bloonsInRange = findBalloons(range / 2);
         Collections.sort(bloonsInRange);
         if (!bloonsInRange.isEmpty() && placed){
             aim();
