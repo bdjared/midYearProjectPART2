@@ -17,7 +17,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Balloon(int speed){
-         getImage().scale(35, 50);
+         getImage().scale(40, 60);
          this.speed = speed;
     }
     public void act()  {

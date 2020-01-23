@@ -19,6 +19,6 @@ public class Path extends Actor
     {
         GreenfootImage art = new GreenfootImage(100,100);
         getWorld().getBackground().setColor(Color.BLACK);
-        getWorld().getBackground().drawLine(0,0,100,100);
+        getWorld().getBackground().drawRect(0,44,280,60);
     }
 }
