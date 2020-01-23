@@ -32,20 +32,20 @@ public class MyWorld extends World{
         rounds.add(round2);
         rounds.add(round3);
         randomize(randomRound);
-        rounds.add(randomRounds);
+        rounds.add(randomRound);
         prepare();
         setPaintOrder(Tower.class, Range.class);
     }
 
     public void act(){ 
         if (roundsCompleted >= rounds.size()){
-            
+            roundsCompleted = 3;
         }
         Object[] currentRound = rounds.get(roundsCompleted);
         int delay = (int)currentRound[0];        
         if (++count % delay == 0 && count / delay < currentRound.length - 1){
-            index = count / delay + 1;
-            addObject((Balloon)currentRound[index], 0, 0);           
+            index = count / delay;
+            addObject((Balloon)currentRound[++index], 0, 0);           
         }
         if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
             count = 0;
@@ -89,8 +89,9 @@ public class MyWorld extends World{
     }
     
     public void randomize(Object[] list){
-        for (int i = 0; i < list.length; i++){
-            
+        list[0] = new Integer((int)(Math.random() * 10) + 7);
+        for (int i = 1; i < list.length; i++){
+            list[i] = bloons[(int)(Math.random() * 3)];
         }
     }
 
