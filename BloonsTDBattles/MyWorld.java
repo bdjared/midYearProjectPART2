@@ -13,9 +13,11 @@ public class MyWorld extends World{
     private int roundsCompleted = 0;
     private int count = 0;
     private int index = 0;
+    private Balloon[] bloons = new Balloon[] {new redBalloon(), new blueBalloon(), new greenBalloon()};
     private Object[] round1 = new Object[] {new Integer(35), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round2 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round3 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
+    private Object[] randomRound = new Object[(int)(Math.random() * 10) + 27];
     private ArrayList<Object[]> rounds = new ArrayList<>();
     
     /**
@@ -28,11 +30,17 @@ public class MyWorld extends World{
         super(700, 400, 1);
         rounds.add(round1);
         rounds.add(round2);
+        rounds.add(round3);
+        randomize(randomRound);
+        rounds.add(randomRounds);
         prepare();
         setPaintOrder(Tower.class, Range.class);
     }
 
     public void act(){ 
+        if (roundsCompleted >= rounds.size()){
+            
+        }
         Object[] currentRound = rounds.get(roundsCompleted);
         int delay = (int)currentRound[0];        
         if (++count % delay == 0 && count / delay < currentRound.length - 1){
@@ -77,6 +85,12 @@ public class MyWorld extends World{
             for (int g = 0; g<1; g++) {
                 addObject(new redBalloon(), 0, 0);
             }
+        }
+    }
+    
+    public void randomize(Object[] list){
+        for (int i = 0; i < list.length; i++){
+            
         }
     }
 
