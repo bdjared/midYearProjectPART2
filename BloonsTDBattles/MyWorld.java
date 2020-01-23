@@ -79,10 +79,6 @@ public class MyWorld extends World{
             }
         }
     }
-    
-    public int getGuapo(){
-        return guapo;
-    }
 
     /**
      * Prepare the world for the start of the program.

@@ -24,7 +24,7 @@ public class Options extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){
-        if (Greenfoot.mouseClicked(this) && world.getGuapo() >= cost){
+        if (Greenfoot.mouseClicked(this) && world.guapo >= cost){
             try{
                 tower = (Tower)(Class.forName(type).newInstance());
                 range = new Range(tower);        
@@ -52,7 +52,6 @@ public class Options extends Actor
                     getWorld().removeObject(range);
                 }
             } 
-        }
-        
+        }        
     }
 }
