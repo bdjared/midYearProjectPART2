@@ -1,18 +1,23 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Write a description of class MyWorld here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MyWorld extends World
-{
+public class MyWorld extends World{
     public int guapo = 250;
     public boolean finito = false;
     private int health;
     private int roundsCompleted = 0;
     private int count = 0;
+    private int index = 0;
+    private Object[] round1 = new Object[] {new Integer(35), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
+    private Object[] round2 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
+    private Object[] round3 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
+    private ArrayList<Object[]> rounds = new ArrayList<>();
+    
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -21,20 +26,26 @@ public class MyWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(700, 400, 1);
+        rounds.add(round1);
+        rounds.add(round2);
         prepare();
         setPaintOrder(Tower.class, Range.class);
     }
 
     public void act(){ 
-        boolean round2started = false;
-        if (roundsCompleted == 0){
-            Round1();
+        Object[] currentRound = rounds.get(roundsCompleted);
+        int delay = (int)currentRound[0];        
+        if (++count % delay == 0 && count / delay < currentRound.length - 1){
+            index = count / delay + 1;
+            addObject((Balloon)currentRound[index], 0, 0);           
         }
-        if (roundsCompleted == 1 && (Greenfoot.isKeyDown("SPACE") || round2started)){
-            round2started = true;
-            Round2();
+        if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
+            count = 0;
+            index = 0;
+            guapo += 100;
+            roundsCompleted++;
         }
-        count++;
+        showText("$" + guapo, 25, 375);
     }
 
     public void Round1 () {
@@ -67,6 +78,10 @@ public class MyWorld extends World
                 addObject(new redBalloon(), 0, 0);
             }
         }
+    }
+    
+    public int getGuapo(){
+        return guapo;
     }
 
     /**

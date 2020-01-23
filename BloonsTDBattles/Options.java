@@ -11,9 +11,12 @@ public class Options extends Actor
     private String type;
     private Tower tower;
     private Range range;
+    private int cost;
+    private MyWorld world = (MyWorld)getWorld();
     
-    public Options(String type){
+    public Options(String type, int cost){
         this.type = type;
+        this.cost = cost;
     }
     
     /**
@@ -21,7 +24,7 @@ public class Options extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){
-        if (Greenfoot.mouseClicked(this)){
+        if (Greenfoot.mouseClicked(this) && world.getGuapo() >= cost){
             try{
                 tower = (Tower)(Class.forName(type).newInstance());
                 range = new Range(tower);        
@@ -45,9 +48,11 @@ public class Options extends Actor
                 range.placeable();
                 if (Greenfoot.mouseClicked(tower)){
                     tower.placed = true;
+                    world.guapo -= cost;
                     getWorld().removeObject(range);
                 }
             } 
         }
+        
     }
 }
