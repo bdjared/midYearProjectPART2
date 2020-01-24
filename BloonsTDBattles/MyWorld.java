@@ -37,7 +37,7 @@ public class MyWorld extends World{
         rounds.add(round4);
         rounds.add(round5);
         setPaintOrder(Tower.class, Options.class, Projectile.class, Balloon.class, Range.class);
-        showText(roundsCompleted + 1 + " - $" + guapo + "                  Lives:" + health, 300, 375);
+        showText(roundsCompleted + 1 + " - $" + guapo + "              Lives:" + health, 150, 375);
     }
 
     public void act(){ 
@@ -48,6 +48,7 @@ public class MyWorld extends World{
             currentRound = rounds.get(roundsCompleted);
         }
         if (currentRound == rounds.get(roundsCompleted)){
+            showText("", 150, 25);
             int delay = (int)currentRound[0];        
             if (count++ % delay == 0 && count / delay < currentRound.length - 1){
                 index = count / delay + 1;
@@ -56,11 +57,14 @@ public class MyWorld extends World{
             if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
                 count = 0;
                 index = 0;
-                guapo += 100;
+                guapo += 100;                
                 roundsCompleted++;
             }
         }
-        showText(roundsCompleted + 1 + " - $" + guapo + "                  Lives:" + health, 300, 375);
+        else {            
+            showText("Press spacebar to start round", 150, 25);
+        }
+        showText(roundsCompleted + 1 + " - $" + guapo + "              Lives:" + health, 150, 375);
     }
     
     public Object[] randomize(){
