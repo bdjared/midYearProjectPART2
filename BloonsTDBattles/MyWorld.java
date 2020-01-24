@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class MyWorld extends World{
-    public int guapo = 250;
+    public int guapo =  300;
     public boolean finito = false;
     private int health;
     private int roundsCompleted = 0;
@@ -32,7 +32,7 @@ public class MyWorld extends World{
         rounds.add(round2);
         rounds.add(round3);          
         setPaintOrder(Tower.class, Options.class, Projectile.class, Balloon.class, Range.class);
-        showText("$" + guapo, 25, 375);
+        showText(roundsCompleted + 1 + " - $" + guapo, 200, 375);
     }
 
     public void act(){ 
@@ -42,8 +42,8 @@ public class MyWorld extends World{
         Object[] currentRound = rounds.get(roundsCompleted);
         int delay = (int)currentRound[0];        
         if (count++ % delay == 0 && count / delay < currentRound.length - 1){
-            index = count / delay;
-            addObject((Balloon)currentRound[++index], 0, 0);           
+            index = count / delay + 1;
+            addObject((Balloon)currentRound[index], 0, 0);           
         }
         if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
             count = 0;
@@ -51,12 +51,16 @@ public class MyWorld extends World{
             guapo += 100;
             roundsCompleted++;
         }
-        showText("$" + guapo, 25, 375);
+        showText(roundsCompleted + 1 + " - $" + guapo, 200, 375);
     }
     
     public Object[] randomize(){
-        Object[] list = new Object[(int)(Math.random() * 13) + 22];
-        list[0] = new Integer((int)(Math.random() * 10) + 7);
+        Object[] list = new Object[(int)(Math.random() * 10)  + 20 + rounds.size()];
+        int size = (int)(Math.random() * 10) + 15 - (roundsCompleted - 5);
+        while (size < 5){
+            size = (int)(Math.random() * 5) + 2;
+        }
+        list[0] = new Integer(size);
         for (int i = 1; i < list.length; i++){
             try{
                 String bloon = bloons[(int)(Math.random() * 3)]; 
@@ -67,6 +71,10 @@ public class MyWorld extends World{
             }            
         }        
         return list;
+    }
+    
+    public int getRoundsCompleted(){
+        return roundsCompleted;
     }
 
     /**
@@ -82,7 +90,7 @@ public class MyWorld extends World{
         showText("$1000", 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
         addObject(buyDartMonkey,650, 60);
-        showText("$150", 648, 100);
+        showText("$175", 648, 100);
         
         Track track = new Track();
         track.getImage().scale(280, 60);

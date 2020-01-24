@@ -8,18 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class greenBalloon extends Balloon
 {
-    public int speed = 5;
+    public int speed = 4;
     /**
      * Act - do whatever the blueBalloon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public greenBalloon() {
-        super(5);
-    }
-    public void act() 
-    {
-      super.act();
-      lizzo(speed);
+        super(4);
     }
     
     public void pop(){

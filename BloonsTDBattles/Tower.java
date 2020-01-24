@@ -25,13 +25,11 @@ public class Tower extends Actor {
     }
        
     public void act() {
-        if (Greenfoot.mouseClicked(this)){
-            if (rangeCircle.showing){
-                rangeCircle.hide();
-            }
-            else {
-                rangeCircle.show();
-            }
+        if (Greenfoot.mouseClicked(this) && !rangeCircle.showing){
+            rangeCircle.show();
+        }
+        else if (Greenfoot.mouseClicked(null) && rangeCircle.showing){
+            rangeCircle.hide();
         }
         if (!placed && placeable){
             rangeCircle.placeable();
@@ -41,14 +39,16 @@ public class Tower extends Actor {
         }
         bloonsInRange = findBalloons(range / 2);
         Collections.sort(bloonsInRange);
-        if (placed){
-            wait--;
-            if (!bloonsInRange.isEmpty()){
-                aim();
-                if (wait <= 0){
-                    attack();
-                }
+        if (placed && !bloonsInRange.isEmpty()){
+            aim();
+            if (wait <= 0){
+                attack();
             }
+        }
+        wait--;  
+        if (Greenfoot.isKeyDown("BACKSPACE") && placed){     
+            getWorld().removeObject(this.rangeCircle); 
+            getWorld().removeObject(this);
         }
     } 
     

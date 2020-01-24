@@ -28,7 +28,8 @@ public class Options extends Actor
             try{
                 Class cls = Class.forName(type);
                 tower = (Tower)cls.newInstance(); 
-                getWorld().addObject(tower, getX(), getY());  
+                getWorld().addObject(tower, getX(), getY()); 
+                tower.rangeCircle.showing = true;
                 getWorld().addObject(tower.rangeCircle, getX(), getY());            
             } catch (Exception e){
                 System.err.println(e);
@@ -46,7 +47,7 @@ public class Options extends Actor
             if (!tower.touching(Tower.class) && !tower.touching(Track.class) && mouse.getX() < 600){
                 tower.placeable = true;
                 if (Greenfoot.mouseClicked(tower)){
-                    tower.placeable = false;
+                    tower.placeable = false;                    
                     tower.placed = true;
                     world.guapo -= cost;
                 }

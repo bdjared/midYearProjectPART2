@@ -16,9 +16,4 @@ public class redBalloon extends Balloon
     public redBalloon() {
         super(2);
     }
-    public void act() 
-    {
-      super.act();
-      lizzo(speed);
-    }
 }

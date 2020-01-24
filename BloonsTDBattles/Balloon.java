@@ -10,20 +10,25 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     public double totalTime;
     public double remainingTime;
     public int distance = 0;
-    public int speed;
+    public final int SPEED;
     int count;
+    private MyWorld world;
     /**
      * Act - do whatever the Balloon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Balloon(int speed){
-         getImage().scale(40, 60);
-         this.speed = speed;
+         getImage().scale(30, 45);
+         this.SPEED = speed;
     }
     public void act()  {
+        if (world == null){
+            world = (MyWorld)getWorld();
+        }
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
-        }
+        }        
+        lizzo(world.getRoundsCompleted() / 15.0 + 1);
     }    
     
     @Override
@@ -35,29 +40,28 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         return distance;
     }
     
-    public void lizzo(int speed){
-        
+    public void lizzo(double spdFactor){        
         if(!isAtEdge()){
             if(this.getX() < 250 && this.getY()<200){
-                setLocation(getX()+speed, getY());        
+                setLocation(getX() + (int)(SPEED * spdFactor), getY()); 
             }
-            else if(this.getY() < 250 && this.getX() < 300){
-                setLocation(getX(), getY()+speed);
+            else if(this.getY() < 230 && this.getX() < 300){
+                setLocation(getX(), getY() + (int)(SPEED * spdFactor));
             }
-            else if(this.getX() <400 && this.getY()>200){
-                setLocation(getX()+speed, getY());
+            else if(this.getX() <415 && this.getY()>230){
+                setLocation(getX() + (int)(SPEED * spdFactor), getY());
             }
-            else if(this.getX() > 400 && this.getY()>175 && this.getX() < 525){
-                setLocation(getX(), getY()-speed);
+            else if(this.getX() > 400 && this.getY()>180 && this.getX() < 525){
+                setLocation(getX(), getY() - (int)(SPEED * spdFactor));
             }
-            else if(this.getX()<550 ){
-                setLocation(getX()+speed, getY());
+            else if(this.getX()<545 ){
+                setLocation(getX() + (int)(SPEED * spdFactor), getY());
             }
             else{
-                setLocation(getX(), getY()+speed);
+                setLocation(getX(), getY() + (int)(SPEED * spdFactor));
             }
                         
-            distance += speed;
+            distance += (int)(SPEED * spdFactor);
         }
         
         else{
@@ -66,8 +70,6 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     }
     
     public void pop(){
-        MyWorld world = (MyWorld)getWorld();
-        world.guapo++;
         getWorld().removeObject(this);
         count++;
     }
