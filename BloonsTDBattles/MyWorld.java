@@ -7,17 +7,19 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class MyWorld extends World{
-    public int guapo =  300;
+    public int guapo =  275;
     public boolean finito = false;
-    private int health;
+    private int health = 50;
     private int roundsCompleted = 0;
     private int count = 0;
     private int index = 0;
+    private Object[] currentRound = new Object[1];
     private String[] bloons = new String[] {"redBalloon", "blueBalloon", "greenBalloon"};
     private Object[] round1 = new Object[] {new Integer(35), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round2 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round3 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round4 = new Object[] {new Integer(25), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon()};
+    private Object[] round5 = new Object[] {new Integer(30), new blueBalloon(), new blueBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon()};
     private ArrayList<Object[]> rounds = new ArrayList<>();
     
     /**
@@ -31,28 +33,34 @@ public class MyWorld extends World{
         prepare();
         rounds.add(round1);
         rounds.add(round2);
-        rounds.add(round3);          
+        rounds.add(round3);   
+        rounds.add(round4);
+        rounds.add(round5);
         setPaintOrder(Tower.class, Options.class, Projectile.class, Balloon.class, Range.class);
-        showText(roundsCompleted + 1 + " - $" + guapo, 200, 375);
+        showText(roundsCompleted + 1 + " - $" + guapo + "                  Lives:" + health, 300, 375);
     }
 
     public void act(){ 
         if (roundsCompleted >= rounds.size() - 1){
             rounds.add(randomize());
         }
-        Object[] currentRound = rounds.get(roundsCompleted);
-        int delay = (int)currentRound[0];        
-        if (count++ % delay == 0 && count / delay < currentRound.length - 1){
-            index = count / delay + 1;
-            addObject((Balloon)currentRound[index], 0, 0);           
+        if (Greenfoot.isKeyDown("SPACE")){
+            currentRound = rounds.get(roundsCompleted);
         }
-        if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
-            count = 0;
-            index = 0;
-            guapo += 100;
-            roundsCompleted++;
+        if (currentRound == rounds.get(roundsCompleted)){
+            int delay = (int)currentRound[0];        
+            if (count++ % delay == 0 && count / delay < currentRound.length - 1){
+                index = count / delay + 1;
+                addObject((Balloon)currentRound[index], 0, 0);           
+            }
+            if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
+                count = 0;
+                index = 0;
+                guapo += 100;
+                roundsCompleted++;
+            }
         }
-        showText(roundsCompleted + 1 + " - $" + guapo, 200, 375);
+        showText(roundsCompleted + 1 + " - $" + guapo + "                  Lives:" + health, 300, 375);
     }
     
     public Object[] randomize(){
@@ -76,6 +84,10 @@ public class MyWorld extends World{
     
     public int getRoundsCompleted(){
         return roundsCompleted;
+    }
+    
+    public void loseLives(int amt){
+        health -= amt;
     }
 
     /**

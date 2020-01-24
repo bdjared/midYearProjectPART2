@@ -14,7 +14,7 @@ public class blueBalloon extends Balloon
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public blueBalloon() {
-        super(3);
+        super(3, 2);
     }
     
     public void pop(){

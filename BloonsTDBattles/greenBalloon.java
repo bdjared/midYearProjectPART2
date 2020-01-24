@@ -14,7 +14,7 @@ public class greenBalloon extends Balloon
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public greenBalloon() {
-        super(4);
+        super(4, 3);
     }
     
     public void pop(){

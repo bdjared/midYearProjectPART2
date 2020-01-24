@@ -14,6 +14,6 @@ public class redBalloon extends Balloon
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public redBalloon() {
-        super(2);
+        super(2, 1);
     }
 }

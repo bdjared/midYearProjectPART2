@@ -30,6 +30,7 @@ public class Options extends Actor
                 tower = (Tower)cls.newInstance(); 
                 getWorld().addObject(tower, getX(), getY()); 
                 tower.rangeCircle.showing = true;
+                tower.moneySpent += cost;
                 getWorld().addObject(tower.rangeCircle, getX(), getY());            
             } catch (Exception e){
                 System.err.println(e);

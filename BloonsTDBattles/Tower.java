@@ -16,15 +16,18 @@ public class Tower extends Actor {
     public boolean placeable = false;
     public Range rangeCircle;
     public GreenfootImage hitbox; 
+    public MyWorld world;
+    public int moneySpent = 0;
     
     public Tower(int range, double attackDelay, String projectile){
         this.range = range;        
         this.attackDelay = attackDelay;
         this.projectile = projectile;
-        rangeCircle = new Range(this);
+        rangeCircle = new Range(this);        
     }
        
     public void act() {
+        world = (MyWorld)getWorld();
         if (Greenfoot.mouseClicked(this) && !rangeCircle.showing){
             rangeCircle.show();
         }
@@ -46,7 +49,8 @@ public class Tower extends Actor {
             }
         }
         wait--;  
-        if (Greenfoot.isKeyDown("BACKSPACE") && placed){     
+        if (Greenfoot.isKeyDown("BACKSPACE") && placed && rangeCircle.showing){     
+            world.guapo += moneySpent * 3 / 5;
             getWorld().removeObject(this.rangeCircle); 
             getWorld().removeObject(this);
         }

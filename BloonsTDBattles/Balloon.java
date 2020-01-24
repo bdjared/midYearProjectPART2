@@ -7,19 +7,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Balloon extends Actor implements Comparable<Balloon>{
-    public double totalTime;
-    public double remainingTime;
     public int distance = 0;
     public final int SPEED;
-    int count;
+    int count;    
     private MyWorld world;
+    private int size;
+    
     /**
      * Act - do whatever the Balloon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Balloon(int speed){
+    public Balloon(int speed, int size){
          getImage().scale(30, 45);
          this.SPEED = speed;
+         this.size = size;
     }
     public void act()  {
         if (world == null){
@@ -28,7 +29,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
         }        
-        lizzo(world.getRoundsCompleted() / 15.0 + 1);
+        lizzo(world.getRoundsCompleted() / 20);
     }    
     
     @Override
@@ -40,32 +41,33 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         return distance;
     }
     
-    public void lizzo(double spdFactor){        
+    public void lizzo(int spdFactor){        
         if(!isAtEdge()){
             if(this.getX() < 250 && this.getY()<200){
-                setLocation(getX() + (int)(SPEED * spdFactor), getY()); 
+                setLocation(getX() + (SPEED + spdFactor), getY()); 
             }
             else if(this.getY() < 230 && this.getX() < 300){
-                setLocation(getX(), getY() + (int)(SPEED * spdFactor));
+                setLocation(getX(), getY() + (SPEED + spdFactor));
             }
             else if(this.getX() <415 && this.getY()>230){
-                setLocation(getX() + (int)(SPEED * spdFactor), getY());
+                setLocation(getX() + (SPEED + spdFactor), getY());
             }
             else if(this.getX() > 400 && this.getY()>180 && this.getX() < 525){
-                setLocation(getX(), getY() - (int)(SPEED * spdFactor));
+                setLocation(getX(), getY() - (SPEED + spdFactor));
             }
             else if(this.getX()<545 ){
-                setLocation(getX() + (int)(SPEED * spdFactor), getY());
+                setLocation(getX() + (SPEED + spdFactor), getY());
             }
             else{
-                setLocation(getX(), getY() + (int)(SPEED * spdFactor));
+                setLocation(getX(), getY() + (SPEED + spdFactor));
             }
                         
-            distance += (int)(SPEED * spdFactor);
+            distance += SPEED + spdFactor;
         }
         
         else{
-           getWorld().removeObject(this);
+           world.loseLives(this.size);
+           world.removeObject(this);
         }
     }
     
