@@ -25,6 +25,7 @@ public class Projectile extends Actor
         if (getWorld() != null && isTouching(Balloon.class)){  
             world = (MyWorld)getWorld();
             if (this instanceof Cannonball){
+                setLocation(getOneIntersectingObject(Balloon.class).getX(), getOneIntersectingObject(Balloon.class).getY());
                 explode();
             }
             else{

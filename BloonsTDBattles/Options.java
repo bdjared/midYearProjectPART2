@@ -11,7 +11,6 @@ public class Options extends Actor
     private String type;
     private Tower tower;
     private int cost;
-    private MyWorld world;
     
     public Options(String type, int cost){
         this.type = type;
@@ -23,8 +22,7 @@ public class Options extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){
-        world = (MyWorld)getWorld();
-        if (Greenfoot.mouseClicked(this) && world.guapo >= cost){
+        if (Greenfoot.mouseClicked(this)){
             try{
                 Class cls = Class.forName(type);
                 tower = (Tower)cls.newInstance(); 
@@ -49,16 +47,11 @@ public class Options extends Actor
                 if (Greenfoot.mouseClicked(tower)){
                     tower.placeable = false;                    
                     tower.placed = true;
-                    world.guapo -= cost;
                 }
             } 
             else{            
                 tower.placeable = false;
             }
-        }        
-        if (Greenfoot.isKeyDown("ESCAPE")){     
-            getWorld().removeObject(tower.rangeCircle); 
-            getWorld().removeObject(tower);
         }
     }
 }
