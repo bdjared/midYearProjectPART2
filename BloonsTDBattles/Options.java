@@ -1,4 +1,4 @@
-;import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class Options here.
@@ -10,13 +10,12 @@ public class Options extends Actor
 {
     private String type;
     private Tower tower;
-    private Range range;
     private int cost;
     private MyWorld world;
     
     public Options(String type, int cost){
         this.type = type;
-        this.cost = cost;
+        this.cost = cost;           
     }
     
     /**
@@ -24,33 +23,41 @@ public class Options extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){
-        if (Greenfoot.mouseClicked(this)){
+        world = (MyWorld)getWorld();
+        if (Greenfoot.mouseClicked(this) && world.guapo >= cost){
             try{
-                tower = (Tower)(Class.forName(type).newInstance());
-                range = new Range(tower);        
-                getWorld().addObject(tower, 0, 0);
-                getWorld().addObject(range, 0, 0);
+                Class cls = Class.forName(type);
+                tower = (Tower)cls.newInstance(); 
+                getWorld().addObject(tower, getX(), getY());  
+                getWorld().addObject(tower.rangeCircle, getX(), getY());            
             } catch (Exception e){
-                System.err.println("error");
+                System.err.println(e);
             }
         }
-        if (tower != null && !tower.placed){
-            buy(tower, range);
+        if (tower != null && !tower.placed && tower.getWorld() != null){
+            buy(tower);
         }
     } 
     
-    public void buy(Tower tower, Range range){
-        MouseInfo mouse = Greenfoot.getMouseInfo();  
-        range.reset();
+    public void buy(Tower tower){
+        MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null){
             tower.setLocation(mouse.getX(), mouse.getY());
             if (!tower.touching(Tower.class) && !tower.touching(Track.class) && mouse.getX() < 600){
-                range.placeable();
+                tower.placeable = true;
                 if (Greenfoot.mouseClicked(tower)){
+                    tower.placeable = false;
                     tower.placed = true;
-                    getWorld().removeObject(range);
+                    world.guapo -= cost;
                 }
             } 
+            else{            
+                tower.placeable = false;
+            }
         }        
+        if (Greenfoot.isKeyDown("ESCAPE")){     
+            getWorld().removeObject(tower.rangeCircle); 
+            getWorld().removeObject(tower);
+        }
     }
 }

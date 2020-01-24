@@ -27,11 +27,11 @@ public class MyWorld extends World{
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(700, 400, 1);
+        prepare();
         rounds.add(round1);
         rounds.add(round2);
-        rounds.add(round3);        
-        prepare();
-        setPaintOrder(Tower.class, Range.class);
+        rounds.add(round3);          
+        setPaintOrder(Tower.class, Options.class, Projectile.class, Balloon.class, Range.class);
         showText("$" + guapo, 25, 375);
     }
 
@@ -41,7 +41,7 @@ public class MyWorld extends World{
         }
         Object[] currentRound = rounds.get(roundsCompleted);
         int delay = (int)currentRound[0];        
-        if (++count % delay == 0 && count / delay < currentRound.length - 1){
+        if (count++ % delay == 0 && count / delay < currentRound.length - 1){
             index = count / delay;
             addObject((Balloon)currentRound[++index], 0, 0);           
         }
@@ -60,9 +60,10 @@ public class MyWorld extends World{
         for (int i = 1; i < list.length; i++){
             try{
                 String bloon = bloons[(int)(Math.random() * 3)]; 
-                list[i] = (Balloon)(Class.forName(bloon).newInstance());
+                Class cls = Class.forName(bloon);
+                list[i] = (Balloon)cls.newInstance();
             } catch (Exception e){
-                System.err.println("error");
+                System.err.println(e);
             }            
         }        
         return list;

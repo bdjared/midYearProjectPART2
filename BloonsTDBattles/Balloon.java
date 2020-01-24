@@ -66,6 +66,8 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     }
     
     public void pop(){
+        MyWorld world = (MyWorld)getWorld();
+        world.guapo++;
         getWorld().removeObject(this);
         count++;
     }

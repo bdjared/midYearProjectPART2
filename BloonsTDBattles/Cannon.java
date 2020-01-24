@@ -7,7 +7,7 @@ import greenfoot.*;
  */
 public class Cannon extends Tower{
     public Cannon() {        
-        super(225, 55, "Cannonball");
-        getImage().scale(225, 285);
+        super(250, 55, "Cannonball");
+        getImage().scale(62, 59);
     }
 }

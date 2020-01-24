@@ -9,6 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BuyCannon extends Options{
     public BuyCannon(){
         super("Cannon", 450);
-        getImage().scale(270, 360);
+        getImage().scale(87, 85);
     }    
 }

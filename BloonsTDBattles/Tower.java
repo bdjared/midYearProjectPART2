@@ -13,22 +13,41 @@ public class Tower extends Actor {
     public String projectile;
     private List<Balloon> bloonsInRange;  
     public boolean placed = false;
+    public boolean placeable = false;
+    public Range rangeCircle;
     public GreenfootImage hitbox; 
     
     public Tower(int range, double attackDelay, String projectile){
-        this.range = range;
+        this.range = range;        
         this.attackDelay = attackDelay;
         this.projectile = projectile;
+        rangeCircle = new Range(this);
     }
        
     public void act() {
-        wait--;
+        if (Greenfoot.mouseClicked(this)){
+            if (rangeCircle.showing){
+                rangeCircle.hide();
+            }
+            else {
+                rangeCircle.show();
+            }
+        }
+        if (!placed && placeable){
+            rangeCircle.placeable();
+        }
+        else if (!placed && !placeable){
+            rangeCircle.reset();
+        }
         bloonsInRange = findBalloons(range / 2);
         Collections.sort(bloonsInRange);
-        if (!bloonsInRange.isEmpty() && placed){
-            aim();
-            if (wait <= 0){
-                attack();
+        if (placed){
+            wait--;
+            if (!bloonsInRange.isEmpty()){
+                aim();
+                if (wait <= 0){
+                    attack();
+                }
             }
         }
     } 
@@ -45,18 +64,18 @@ public class Tower extends Actor {
     
     public void attack(){
         try{
-            Projectile shot = (Projectile)(Class.forName(projectile).newInstance());
+            Class cls = Class.forName(projectile);
+            Projectile shot = (Projectile)cls.newInstance();
             getWorld().addObject(shot, getX(), getY());
             shot.setRotation(getRotation() + 90);     
         } catch (Exception e){
-            System.err.println("error");
+            System.err.println(e);
         }
         wait = attackDelay;
     }
     
     public boolean touching(Class clss){
-        List<Actor> list =
-            getWorld().getObjects(clss),
+        List<Actor> list = getWorld().getObjects(clss),
         list2 = new ArrayList();
         for(Actor A : list)
             if(A!=this && intersects(A) && touch(A)){

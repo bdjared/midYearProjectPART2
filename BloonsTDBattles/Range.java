@@ -9,9 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Range extends Actor
 {
     private Tower parent;
+    public boolean showing;
     
     public Range (Tower parent){        
         this.parent = parent;
+        showing = true;
     }
     
     public void act(){
@@ -22,6 +24,16 @@ public class Range extends Actor
         setImage("blackCircle.png");
         getImage().setTransparency(100);
         getImage().scale(parent.range * 6/5, parent.range * 6/5);
+    }
+    
+    public void hide(){
+        getImage().setTransparency(0);
+        showing = false;
+    }
+    
+    public void show(){
+        getImage().setTransparency(100);
+        showing = true;
     }
     
     public void reset(){
