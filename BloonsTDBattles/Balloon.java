@@ -28,7 +28,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
         }        
-        lizzo(world.getRoundsCompleted() / 7);
+        lizzo(world.getRoundsCompleted() / 10);
     }    
     
     @Override
