@@ -24,7 +24,7 @@ public class Options extends Actor
      */
     public void act(){
         world = (MyWorld)getWorld();
-        if (Greenfoot.mouseClicked(this) && world.guapo >= cost){
+        if (Greenfoot.mouseClicked(this) && world.guapo >= cost && world.health > 0){
             try{
                 Class cls = Class.forName(type);
                 tower = (Tower)cls.newInstance(); 
@@ -38,7 +38,7 @@ public class Options extends Actor
         }
         if (tower != null && !tower.placed && tower.getWorld() != null){
             buy(tower);
-        }
+        }        
     } 
     
     public void buy(Tower tower){
@@ -56,6 +56,9 @@ public class Options extends Actor
             else{            
                 tower.placeable = false;
             }
+        }
+        if (Greenfoot.isKeyDown("ESCAPE")){
+            tower.remove();
         }
     }
 }

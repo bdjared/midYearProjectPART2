@@ -9,7 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Balloon extends Actor implements Comparable<Balloon>{
     public int distance = 0;
     public final int SPEED;
-    int count;    
     private MyWorld world;
     private int size;
     
@@ -29,7 +28,7 @@ public class Balloon extends Actor implements Comparable<Balloon>{
         if (distance == 0 && getX() != 1){
             setLocation(1, 75);
         }        
-        lizzo(world.getRoundsCompleted() / 20);
+        lizzo(world.getRoundsCompleted() / 7);
     }    
     
     @Override
@@ -72,8 +71,11 @@ public class Balloon extends Actor implements Comparable<Balloon>{
     }
     
     public void pop(){
+        if (world == null){
+            world = (MyWorld)getWorld();
+        }
+        world.balloonsPopped++;
         getWorld().removeObject(this);
-        count++;
     }
     
 }

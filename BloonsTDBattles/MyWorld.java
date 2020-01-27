@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MyWorld extends World{
     public int guapo =  275;
     public boolean finito = false;
-    private int health = 50;
+    public int health = 20;
     private int roundsCompleted = 0;
     private int count = 0;
     private int index = 0;
@@ -18,9 +18,10 @@ public class MyWorld extends World{
     private Object[] round1 = new Object[] {new Integer(35), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round2 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
     private Object[] round3 = new Object[] {new Integer(20), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon(), new redBalloon()};
-    private Object[] round4 = new Object[] {new Integer(25), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon()};
-    private Object[] round5 = new Object[] {new Integer(30), new blueBalloon(), new blueBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon()};
+    private Object[] round4 = new Object[] {new Integer(22), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon(), new blueBalloon()};
+    private Object[] round5 = new Object[] {new Integer(27), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon(), new greenBalloon()};
     private ArrayList<Object[]> rounds = new ArrayList<>();
+    public  int balloonsPopped = 0;
     
     /**
      * Constructor for objects of class MyWorld.
@@ -37,34 +38,39 @@ public class MyWorld extends World{
         rounds.add(round4);
         rounds.add(round5);
         setPaintOrder(Tower.class, Options.class, Projectile.class, Balloon.class, Range.class);
-        showText(roundsCompleted + 1 + " - $" + guapo + "              Lives:" + health, 150, 375);
+        showText("Round " + (roundsCompleted + 1) + ": $" + guapo + "                                                   Lives:" + health, 250, 375);
     }
 
     public void act(){ 
-        if (roundsCompleted >= rounds.size() - 1){
-            rounds.add(randomize());
+        if (health <= 0){
+            gameOver();
         }
-        if (Greenfoot.isKeyDown("SPACE")){
-            currentRound = rounds.get(roundsCompleted);
-        }
-        if (currentRound == rounds.get(roundsCompleted)){
-            showText("", 150, 25);
-            int delay = (int)currentRound[0];        
-            if (count++ % delay == 0 && count / delay < currentRound.length - 1){
-                index = count / delay + 1;
-                addObject((Balloon)currentRound[index], 0, 0);           
+        else {
+            if (roundsCompleted > rounds.size() - 1){
+                rounds.add(randomize());
             }
-            if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
-                count = 0;
-                index = 0;
-                guapo += 100;                
-                roundsCompleted++;
+            if (Greenfoot.isKeyDown("SPACE")){
+                currentRound = rounds.get(roundsCompleted);
+            }
+            if (currentRound == rounds.get(roundsCompleted)){
+                showText("", 150, 25);
+                int delay = (int)currentRound[0];        
+                if (count++ % delay == 0 && count / delay < currentRound.length - 1){
+                    index = count / delay + 1;
+                    addObject((Balloon)currentRound[index], 0, 0);           
+                }
+                if (index == currentRound.length - 1 && getObjects(Balloon.class).isEmpty()) {
+                    count = 0;
+                    index = 0;
+                    guapo += 100 - roundsCompleted;                
+                    roundsCompleted++;
+                }
+            }
+            else {            
+                showText("Press spacebar to start round", 150, 25);
             }
         }
-        else {            
-            showText("Press spacebar to start round", 150, 25);
-        }
-        showText(roundsCompleted + 1 + " - $" + guapo + "              Lives:" + health, 150, 375);
+        showText("Round " + (roundsCompleted + 1) + ": $" + guapo + "                                                   Lives:" + health, 250, 375);
     }
     
     public Object[] randomize(){
@@ -76,7 +82,14 @@ public class MyWorld extends World{
         list[0] = new Integer(size);
         for (int i = 1; i < list.length; i++){
             try{
-                String bloon = bloons[(int)(Math.random() * 3)]; 
+                int index = (int)(Math.random() * 3);
+                if (roundsCompleted >= 10 && index == 0){
+                    index++;
+                }
+                if (roundsCompleted >= 20 && index == 1){
+                    index++;
+                }
+                String bloon = bloons[index]; 
                 Class cls = Class.forName(bloon);
                 list[i] = (Balloon)cls.newInstance();
             } catch (Exception e){
@@ -93,6 +106,11 @@ public class MyWorld extends World{
     public void loseLives(int amt){
         health -= amt;
     }
+    
+    public void gameOver(){
+        health = 0;
+        showText(String.format("Game Over\nYou popped %d balloons", balloonsPopped), 300, 200);
+    }
 
     /**
      * Prepare the world for the start of the program.
@@ -107,7 +125,7 @@ public class MyWorld extends World{
         showText("$" + buySuperMonkey.cost, 645, 357);
         BuyDartMonkey buyDartMonkey = new BuyDartMonkey();
         addObject(buyDartMonkey,650, 60);
-        showText("$" + buyDartMonkey.cost, 648, 100);
+        showText("$" + buyDartMonkey.cost, 645, 100);
         
         Track track = new Track();
         track.getImage().scale(280, 60);

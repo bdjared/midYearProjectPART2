@@ -21,6 +21,6 @@ public class greenBalloon extends Balloon
         Balloon newBloon = new blueBalloon();
         newBloon.distance = this.getDistance();
         getWorld().addObject(newBloon, getX(), getY());
-        getWorld().removeObject(this);
+        super.pop();
     }
 }

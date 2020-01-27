@@ -42,7 +42,7 @@ public class Tower extends Actor {
         }
         bloonsInRange = findBalloons(range / 2);
         Collections.sort(bloonsInRange);
-        if (placed && !bloonsInRange.isEmpty()){
+        if (placed && !bloonsInRange.isEmpty() && world.health > 0){
             aim();
             if (wait <= 0){
                 attack();
@@ -86,6 +86,11 @@ public class Tower extends Actor {
                 return true;
             }
         return false;
+    }
+    
+    public void remove(){
+        getWorld().removeObject(rangeCircle);
+        getWorld().removeObject(this);
     }
     
     public boolean touch(Actor a_big){
